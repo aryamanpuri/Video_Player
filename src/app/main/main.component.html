@@ -2,8 +2,19 @@
     <input (keyup)="FinishTyping($event)" (keydown)="StartTyping()" [placeholder]="['Enter Video URL or video title']">
 </div>
 
+<aside class="history-container">
+  <button (click)="isBookmarksView$.next(!isBookmarksView$.value)">
+    <ng-container *ngIf="isBookmarksView$ | async else historyView">History</ng-container>
+    <ng-template #historyView>Bookmarks ({{videosFromBookmarksLength$ | async}})</ng-template>
+  </button>
+  <app-playlist *ngIf="isBookmarksView$ | async else historyTab" [videos]="videosFromBookmarks$ | async" (videoSelected)="PlayVideo($event)"></app-playlist>
+  <ng-template #historyTab>
+    <app-playlist [videos]="videosFromHistory$ | async" (videoSelected)="PlayVideo($event)"></app-playlist>
+  </ng-template>
+</aside>
+
 <div class="float-left">
-    <div class="video-section-container" *ngIf="videoUrl && searchValue">
+    <div class="video-section-container" *ngIf="videoUrl">
         <app-video-player [videoUrl]="videoUrl" [videoObj]="currentVideo" [ratedVideos]="ratedVideos"
             (likeUpdate)="UpdateLikes($event)"></app-video-player>
     </div>

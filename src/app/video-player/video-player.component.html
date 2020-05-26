@@ -1,4 +1,5 @@
 <div class="video-player-container">
     <iframe [src]="videoUrl | safe" allowfullscreen width="100%" height="450px"></iframe>
     <h1>{{videoObj.title}}</h1>
+    <button (click)="likeUpdate.emit(videoObj)">add to bookmarks</button>
 </div>

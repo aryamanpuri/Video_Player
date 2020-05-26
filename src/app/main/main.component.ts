@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { YoutubeService } from '../services/youtube/youtube.service';
 import { VideoModel } from '../models/video.model';
 import { LikedVideosService } from '../services/liked-videos.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { HistoryService } from '../services/history/history.service';
+import { BookmarkService } from '../services/bookmark/bookmark.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +17,7 @@ export class MainComponent implements OnInit {
   start: number = 1800;
 
   searchValue: string;
-  
+
   videosResponse: any = [];
   videos: VideoModel[] = [];
 
@@ -24,7 +27,23 @@ export class MainComponent implements OnInit {
   ratedVideosSubscription: Subscription;
   ratedVideos: VideoModel[];
 
-  constructor(private youtubeService: YoutubeService, private likedVideosService: LikedVideosService) { }
+  videosFromHistory$: Observable<VideoModel[]>;
+  videosFromBookmarks$: Observable<VideoModel[]>;
+  videosFromBookmarksLength$: Observable<number>;
+  isBookmarksView$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(
+    private youtubeService: YoutubeService,
+    private likedVideosService: LikedVideosService,
+    private historyService: HistoryService,
+    private bookmarkService: BookmarkService,
+  ) {
+    this.videosFromHistory$ = this.historyService.selectVideos();
+    this.videosFromBookmarks$ = this.bookmarkService.selectVideos();
+    this.videosFromBookmarksLength$ = this.videosFromBookmarks$.pipe(
+      map(videos => videos.length),
+    );
+  }
 
   ngOnInit() {
   }
@@ -90,10 +109,12 @@ OrderVideosList(){
   PlayVideo(video: VideoModel){
     this.currentVideo = video;
     this.videoUrl =  "https://www.youtube.com/embed/" + video.videoId;
+    this.historyService.addVideo(video);
   }
 
   UpdateLikes(video: VideoModel){
-    this.ratedVideos.push(video);
-    this.OrderVideosList()
+    this.bookmarkService.addVideo(video);
+    // this.ratedVideos.push(video);
+    // this.OrderVideosList()
   }
 }

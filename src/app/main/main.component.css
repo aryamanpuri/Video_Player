@@ -9,9 +9,14 @@
     float: right;
 }
 
+.history-container {
+  float:left;
+  width: 30%;
+}
+
 .float-left{
     float:left;
-    width: 70%;
+    width: 40%;
 }
 
 .search-container{
