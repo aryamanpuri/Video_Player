@@ -1,0 +1,7 @@
+
+<div *ngIf="videos"> 
+    <div class="video-container" *ngFor="let video of videos" (click)="SelectVideo(video)">
+        <img class="video-thumbnail" [src]="[video.thumbnail]">
+        <h3 class="video-title">{{video.title}}</h3>
+    </div>
+</div>

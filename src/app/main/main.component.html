@@ -1,0 +1,14 @@
+<div class="search-container">
+    <input (keyup)="FinishTyping($event)" (keydown)="StartTyping()" [placeholder]="['Enter Video URL or video title']">
+</div>
+
+<div class="float-left">
+    <div class="video-section-container" *ngIf="videoUrl && searchValue">
+        <app-video-player [videoUrl]="videoUrl" [videoObj]="currentVideo" [ratedVideos]="ratedVideos"
+            (likeUpdate)="UpdateLikes($event)"></app-video-player>
+    </div>
+</div>
+
+<aside class="playlist-container">
+    <app-playlist [videos]="videos" (videoSelected)="PlayVideo($event)"></app-playlist>
+</aside>

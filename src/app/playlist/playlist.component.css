@@ -1,0 +1,48 @@
+*{
+    box-sizing: border-box;
+}
+
+.video-container{
+    min-height: 150px;
+    margin-bottom: 10px;
+    color: white;
+    background: #2f302f;
+    position: relative;
+    cursor:pointer;
+}
+
+.video-container:hover:before{
+    content: "▶";
+    position: absolute;
+    top: auto;
+    vertical-align: super;
+    left: 20%;
+    bottom: 40%;
+    border: 4px solid black;
+    color: black;
+    border-radius: 50%;
+    padding: 10px 10px 10px 12px;
+    background: #eee;
+    opacity: .7;
+}
+
+.video-title{
+    width: 40%;
+    display:inline-block;
+    margin-block-start: 0 em;
+    vertical-align: top;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.video-thumbnail{
+    width: 50%;
+}
+
+.like-icon{
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+}
+
+

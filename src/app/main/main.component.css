@@ -1,0 +1,55 @@
+*{
+    box-sizing: border-box;
+}
+
+.playlist-container{
+    width: 30%;
+    height: 100vh;
+    overflow-y: auto;
+    float: right;
+}
+
+.float-left{
+    float:left;
+    width: 70%;
+}
+
+.search-container{
+    text-align: center;
+}
+
+.search-container input{
+    font-size: 2rem;
+    height: 150px;
+    width: 100%;
+    background: lightseagreen;
+    color: cornsilk;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .playlist-container{
+        width: 80%;
+        margin: 0 auto;
+        display: block;
+        float: none;
+    }
+
+    .float-left{
+        width: 80%;
+        margin: 0 auto;
+        display: block;
+        float: none;
+    }
+}
+
+
+@media only screen and (max-width: 767px){
+    .playlist-container{
+        width: 100%;
+    }
+
+    .float-left{
+        width: 100%;
+    }
+}
+

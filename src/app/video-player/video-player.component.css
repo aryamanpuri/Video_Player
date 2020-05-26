@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+
+.like-btn{
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.like-btn:hover{
+    font-size: 3rem;
+}
+
+.thumbs-up:hover{
+    color: lightblue;
+}
+
+.thumbs-down:hover{
+    color: red;
+}
+
+.video-player-container{
+    width: 80%;
+    margin: 20px auto;
+}
